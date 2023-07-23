@@ -65,6 +65,7 @@ lemma KaehlerDifferential.slow {R S : Type} [CommRing R] [CommRing S] [Algebra R
     [Module R M] [Module S M] [IsScalarTower R S M] (a b : S) :
     False := by
   set_option trace.profiler true in
+  set_option pp.proofs.withType false in
   have foo := LinearMap.map_smul_of_tower (Ideal.toCotangent (ideal R S)) a
   /-
   [Elab.step] [3.587504s] 
@@ -73,4 +74,3 @@ lemma KaehlerDifferential.slow {R S : Type} [CommRing R] [CommRing S] [Algebra R
   -/
   sorry
 
-#exit
