@@ -1,26 +1,28 @@
-import Mathlib.RingTheory.IsTensorProduct
-import Mathlib.Algebra.Module.Torsion
+import Mathlib.RingTheory.TensorProduct
 
 set_option autoImplicit false
 
 namespace Module
 
-variable {R M : Type _} [CommRing R] [AddCommGroup M] [Module R M]
-variable {I : Ideal R} (hM : IsTorsionBySet R M I)
+variable (R M : Type) [CommRing R] [AddCommGroup M] [Module R M] {I : Ideal R} 
 
 @[reducible]
-def IsTorsionBySet' (s : Set R) :=
+def IsTorsionBySet (s : Set R) :=
   ∀ ⦃x : M⦄ ⦃a : s⦄, (a : R) • x = 0
 
-def IsTorsionBySet.module' : Module (R ⧸ I) M :=
-  @Function.Surjective.moduleLeft _ _ _ _ _ _ _ hM.hasSMul _ Ideal.Quotient.mk_surjective
-    (IsTorsionBySet.mk_smul hM)
+variable (hM : IsTorsionBySet R M I)
+
+variable {R M}
+
+def IsTorsionBySet.hasSMul {R M : Type} [CommRing R] [AddCommGroup M] [Module R M]
+    {I : Ideal R} (hM : IsTorsionBySet R M ↑I) : SMul (R ⧸ I) M where
+  smul b x := Quotient.liftOn' b (· • x) sorry
+
+def IsTorsionBySet.module : Module (R ⧸ I) M :=
+  @Function.Surjective.moduleLeft _ _ _ _ _ _ _ hM.hasSMul (Ideal.Quotient.mk I) sorry sorry
 
 instance : Module (R ⧸ I) (M ⧸ I • (⊤ : Submodule R M)) :=
-  IsTorsionBySet.module' (R := R) (I := I) fun x r => by
-    induction x using Quotient.inductionOn
-    refine' (Submodule.Quotient.mk_eq_zero _).mpr (Submodule.smul_mem_smul r.prop _)
-    trivial
+  IsTorsionBySet.module (R := R) (I := I) fun x r => sorry
 
 end Module
 
@@ -38,7 +40,6 @@ instance : AddCommGroup I.Cotangent := by delta Cotangent; infer_instance
 
 instance cotangentModule : Module (R ⧸ I) I.Cotangent := by 
   delta Cotangent
-  --#synth Module (R ⧸ I) ({ x // x ∈ I } ⧸ I • ⊤)
   infer_instance
 
 instance Cotangent.moduleOfTower : Module S I.Cotangent :=
