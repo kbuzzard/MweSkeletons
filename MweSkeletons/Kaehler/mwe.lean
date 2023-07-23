@@ -1,4 +1,7 @@
 import Mathlib.RingTheory.TensorProduct
+--import MweSkeletons.Module
+
+-- TODO: submodules, ideals.
 
 set_option autoImplicit false
 
