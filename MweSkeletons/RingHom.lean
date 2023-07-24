@@ -1,7 +1,5 @@
 import MweSkeletons.CommRing
-
-def Function.Injective (f : α → β) : Prop :=
-  ∀ ⦃a₁ a₂⦄, f a₁ = f a₂ → a₁ = a₂
+import MweSkeletons.Injective
 
 class FunLike (F : Sort _) (α : outParam (Sort _)) (β : outParam <| α → Sort _) where
   /-- The coercion from `F` to a function. -/
