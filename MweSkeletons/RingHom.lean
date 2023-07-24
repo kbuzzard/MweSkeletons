@@ -243,3 +243,19 @@ def RingHomClass.toRingHom {F α β : Type _} {_ : NonAssocSemiring α}
 instance {F α β : Type _} {_ : NonAssocSemiring α}
   {_ : NonAssocSemiring β} [RingHomClass F α β] : CoeTC F (α →+* β) :=
   ⟨RingHomClass.toRingHom⟩
+
+instance instRingHomClass {_ : NonAssocSemiring α} {_ : NonAssocSemiring β} : RingHomClass (α →+* β) α β where
+  coe f := f.toFun
+  coe_injective' f g h := by
+    cases f
+    cases g
+    congr
+    apply FunLike.coe_injective'
+    exact h
+  map_add := RingHom.map_add'
+  map_zero := RingHom.map_zero'
+  map_mul f := f.map_mul'
+  map_one f := f.map_one'
+
+def RingHom.id (α : Type _) [NonAssocSemiring α] : α →+* α := by
+  refine' { toFun := _root_.id.. } <;> intros <;> rfl

@@ -10,6 +10,11 @@ protected def Mem (a : α) (s : Set α) : Prop :=
 instance : Membership α (Set α) :=
   ⟨Set.Mem⟩
 
+@[reducible] def Elem (s : Set α) : Type u := { x // x ∈ s }
+
+instance {α : Type u} : CoeSort (Set α) (Type u) :=
+  ⟨Elem⟩
+  
 end Set
 
 structure AddSubsemigroup (M : Type _) [Add M] where
@@ -30,12 +35,3 @@ structure SubMulAction (R : Type u) (M : Type v) [SMul R M] : Type v where
 
 structure Submodule (R : Type u) (M : Type v) [Semiring R] [AddCommMonoid M] [Module R M] extends
   AddSubmonoid M, SubMulAction R M : Type v
-
-@[reducible]
-def Ideal (R : Type u) [Semiring R] :=
-  Submodule R R
-
-/-
-failed to synthesize instance
-  Module R R
--/
