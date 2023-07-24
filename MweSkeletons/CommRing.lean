@@ -116,6 +116,8 @@ class NonUnitalSemiring (α : Type u) extends NonUnitalNonAssocSemiring α, Semi
 
 class Semiring (α : Type u) extends NonUnitalSemiring α, NonAssocSemiring α, MonoidWithZero α
 
+class CommSemiring (R : Type u) extends Semiring R, CommMonoid R
+
 class Ring (R : Type u) extends Semiring R, AddCommGroup R, AddGroupWithOne R
 
 class CommRing (α : Type u) extends Ring α, CommMonoid α

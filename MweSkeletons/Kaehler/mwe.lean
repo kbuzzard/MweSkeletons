@@ -9,8 +9,6 @@ namespace Module
 
 variable (R M : Type) [CommRing R] [AddCommGroup M] [Module R M] {I : Ideal R} 
 
-#synth SMul R R -- Algebra.toSMul
-
 @[reducible]
 def IsTorsionBySet (s : Set R) :=
   ∀ ⦃x : M⦄ ⦃a : s⦄, (a : R) • x = 0

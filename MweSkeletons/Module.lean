@@ -5,10 +5,11 @@ Authors: Nathaniel Thomas, Jeremy Avigad, Johannes Hölzl, Mario Carneiro
 -/
 --import Mathlib.Algebra.SMulWithZero
 import MweSkeletons.CommRing
+set_option autoImplicit false
 
 open Function
 
-universe u v
+universe u v w
 
 variable {α R k S M M₂ M₃ ι : Type _}
 
@@ -22,7 +23,7 @@ class SMul (M : Type _) (α : Type _) where
 
 infixr:73 " • " => HSMul.hSMul
 
-instance instHSMul [SMul α β] : HSMul α β β where
+instance instHSMul {α β : Type _} [SMul α β] : HSMul α β β where
   hSMul := SMul.smul
 
 class MulAction (α : Type _) (β : Type _) [Monoid α] extends SMul α β where
@@ -59,10 +60,3 @@ instance (priority := 100) Module.toMulActionWithZero : MulActionWithZero R M :=
 
 end AddCommMonoid
 
-instance (priority := 910) Semiring.toModule [Semiring R] : Module R R where
-  smul_add := mul_add
-  add_smul := add_mul
-  zero_smul := zero_mul
-  smul_zero := mul_zero
-
--- fields missing: 'smul', 'one_smul', 'mul_smul'
