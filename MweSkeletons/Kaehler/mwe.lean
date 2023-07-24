@@ -1,5 +1,5 @@
 import Mathlib.RingTheory.TensorProduct
---import MweSkeletons.Module
+--import MweSkeletons.Ideal
 
 -- TODO: submodules, ideals.
 
