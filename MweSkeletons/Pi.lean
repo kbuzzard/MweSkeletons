@@ -37,11 +37,4 @@ instance mulAction (α) {m : Monoid α} [∀ i, MulAction α <| f i] :
   mul_smul _ _ _ := funext fun _ => MulAction.mul_smul _ _ _
   one_smul _ := funext fun _ => MulAction.one_smul _
 
-set_option trace.Meta.synthInstance true
-
-set_option maxHeartbeats 10000 -- consider turning trace.Meta.synthInstance to false if you
--- make this number much bigger
-
-set_option trace.Meta.isDefEq true
-
 end Pi
