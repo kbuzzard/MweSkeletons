@@ -121,3 +121,6 @@ class CommSemiring (R : Type u) extends Semiring R, CommMonoid R
 class Ring (R : Type u) extends Semiring R, AddCommGroup R, AddGroupWithOne R
 
 class CommRing (α : Type u) extends Ring α, CommMonoid α
+
+instance (R : Type u) [CommRing R] : CommSemiring R where
+  mul_comm := sorry
